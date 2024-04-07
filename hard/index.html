@@ -5,10 +5,28 @@
       margin: 0;
       box-sizing: border-box;
     }
+
+    /* Style for the back button */
+    #backButton {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      padding: 10px 20px;
+      cursor: pointer;
+      z-index: 9999;
+      border: 2px solid red; /* Added border styling */
+      border-radius: 0.2rem;
+      font-family: 'Montserrat', sans-serif;
+    }
   </style>
 </head>
 
 <body>
+  <!-- Back button -->
+  <div id="backButton" onclick="goToMainMenu()">Main Menu</div>
+
   <!-- Red container div-->
   <div style="position: relative; display: inline-block">
     <!-- Smaller Red Container Div-->
@@ -115,4 +133,10 @@
   <script src="./js/utils.js"></script>
   <script src="./js/classes.js"></script>
   <script src="./index.js"></script>
+
+  <script>
+    function goToMainMenu() {
+      window.location.href = "/index.html";
+    }
+  </script>
 </body>
