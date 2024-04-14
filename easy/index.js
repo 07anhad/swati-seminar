@@ -301,6 +301,7 @@ function checkHealthAlert(character, name) {
       if (parsedAnswer === answer) {
         character.health = 100; // Reset health to full value
         updateHealthBars(); // Update the health bars
+        // alert('Great Job!');
         alertCounter = 0; // Reset the alert counter
       } else {
         alert('Incorrect answer! Health remains low.'); // Inform the user about incorrect answer
