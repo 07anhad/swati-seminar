@@ -279,14 +279,34 @@ function updateHealthBars() {
   enemyHealthBar.style.width = enemy.health + '%'
 }
 
-function checkHealthAlert(character, name) {
-  const lowHealthThreshold = 20 // Adjust as needed
+let alertCounter = 0; // Track the number of alerts shown
 
-  if (character.health <= lowHealthThreshold) {
-    const confirmation = confirm(name + "'s health is low! Click OK to reset health.")
-    if (confirmation) {
-      character.health = 100; // Reset health to full value
-      updateHealthBars(); // Update the health bars
+function checkHealthAlert(character, name) {
+  const lowHealthThreshold = 20; // Adjust as needed
+
+  if (character.health <= lowHealthThreshold && alertCounter < 2) {
+    alertCounter++; // Increment the alert counter
+    const num1 = Math.floor(Math.random() * 10) + 1; // Generate random numbers
+    const num2 = Math.floor(Math.random() * 10) + 1;
+    const answer = num1 + num2; // Calculate the correct answer
+
+    const userAnswer = prompt(
+      `${name}'s health is low! Answer this question to reset health:\nWhat is ${num1} + ${num2}?`
+    );
+
+    if (userAnswer !== null) {
+      const parsedAnswer = parseInt(userAnswer); // Parse user's answer to an integer
+
+      // Check if the user's answer is correct
+      if (parsedAnswer === answer) {
+        character.health = 100; // Reset health to full value
+        updateHealthBars(); // Update the health bars
+        alertCounter = 0; // Reset the alert counter
+      } else {
+        alert('Incorrect answer! Health remains low.'); // Inform the user about incorrect answer
+      }
+    } else {
+      alertCounter--; // Decrement the alert counter if the user cancels
     }
   }
 }
