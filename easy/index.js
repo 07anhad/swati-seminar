@@ -261,13 +261,37 @@ function animate() {
     enemy.isAttacking = false
   }
 
-  
+  updateHealthBars()
+  checkHealthAlert(player, 'Player')
+  checkHealthAlert(enemy, 'Enemy')
 
   // end game based on health
   if (enemy.health <= 0 || player.health <= 0) {
     determineWinner({ player, enemy, timerId })
   }
 }
+
+function updateHealthBars() {
+  const playerHealthBar = document.querySelector('#playerHealth')
+  const enemyHealthBar = document.querySelector('#enemyHealth')
+
+  playerHealthBar.style.width = player.health + '%'
+  enemyHealthBar.style.width = enemy.health + '%'
+}
+
+function checkHealthAlert(character, name) {
+  const lowHealthThreshold = 20 // Adjust as needed
+
+  if (character.health <= lowHealthThreshold) {
+    const confirmation = confirm(name + "'s health is low! Click OK to reset health.")
+    if (confirmation) {
+      character.health = 100; // Reset health to full value
+      updateHealthBars(); // Update the health bars
+    }
+  }
+}
+
+
 
 animate()
 
