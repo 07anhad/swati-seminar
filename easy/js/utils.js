@@ -9,29 +9,46 @@ function rectangularCollision({ rectangle1, rectangle2 }) {
     rectangle1.attackBox.position.y <= rectangle2.position.y + rectangle2.height
   )
 }
-
 function determineWinner({ player, enemy, timerId }) {
-  clearTimeout(timerId)
-  document.querySelector('#displayText').style.display = 'flex'
+  clearTimeout(timerId);
+  document.querySelector('#displayText').style.display = 'flex';
+
   if (player.health === enemy.health) {
-    document.querySelector('#displayText').innerHTML = 'Tie'
+    document.querySelector('#displayText').innerHTML = 'Tie';
   } else if (player.health > enemy.health) {
-    document.querySelector('#displayText').innerHTML = 'Player 1 Wins'
+    document.querySelector('#displayText').innerHTML = 'Player 1 Wins';
+    // Ask the player if they want to play the next level
+    if (confirm('Do you want to play the next level?')) {
+      // If yes, redirect to the next level
+      window.location.href = '../hard/index.html';
+    } else {
+      // If no, redirect to the main menu
+      window.location.href = '../index.html';
+    }
   } else if (player.health < enemy.health) {
-    document.querySelector('#displayText').innerHTML = 'Player 2 Wins'
+    document.querySelector('#displayText').innerHTML = 'Player 2 Wins';
+    // Ask the player if they want to play the next level
+    if (confirm('Do you want to play the next level?')) {
+      // If yes, redirect to the next level
+      window.location.href = '../hard/index.html';
+    } else {
+      // If no, redirect to the main menu
+      window.location.href = '../index.html';
+    }
   }
 }
 
-let timer = 60
-let timerId
+let timer = 60;
+let timerId;
+
 function decreaseTimer() {
   if (timer > 0) {
-    timerId = setTimeout(decreaseTimer, 1000)
-    timer--
-    document.querySelector('#timer').innerHTML = timer
+    timerId = setTimeout(decreaseTimer, 1000);
+    timer--;
+    document.querySelector('#timer').innerHTML = timer;
   }
 
   if (timer === 0) {
-    determineWinner({ player, enemy, timerId })
+    determineWinner({ player, enemy, timerId });
   }
 }

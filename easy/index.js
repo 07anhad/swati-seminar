@@ -280,6 +280,7 @@ function updateHealthBars() {
 }
 
 let alertCounter = 0; // Track the number of alerts shown
+let incorrectAnswerShown = false; // Track if incorrect answer alert has been shown
 
 function checkHealthAlert(character, name) {
   const lowHealthThreshold = 20; // Adjust as needed
@@ -302,17 +303,13 @@ function checkHealthAlert(character, name) {
         character.health = 100; // Reset health to full value
         updateHealthBars(); // Update the health bars
         // alert('Great Job!');
-        alertCounter = 0; // Reset the alert counter
-      } else {
+      } else if (!incorrectAnswerShown) {
+        incorrectAnswerShown = true;
         alert('Incorrect answer! Health remains low.'); // Inform the user about incorrect answer
       }
-    } else {
-      alertCounter--; // Decrement the alert counter if the user cancels
     }
   }
 }
-
-
 
 animate()
 
